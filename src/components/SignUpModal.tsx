@@ -1,24 +1,37 @@
-import { Box, Typography, TextField, InputLabel, Button } from "@mui/material";
 import React from "react";
-import { styled } from "@mui/system";
-import { useNavigate } from "react-router-dom";
-
-import eye from "../assets/eye.svg";
-import Ellipse2 from "../assets/Ellipse2.svg";
+import { Box, styled } from "@mui/system";
+import { Button, Typography } from "@mui/material";
 import Cross from "../assets/Cross.svg";
+import eye from "../assets/eye.svg";
 
-const StyledBox = styled(Box)(() => ({
-  width: "463px",
-  height: "420px",
+
+const BlurredBackground = styled("div")(() => ({
+    position: "fixed",
+    top: 0,
+    left: 0,
+    width: "100%",
+    height: "100%",
+    backdropFilter: "blur(2px)",
+    transition: "backdrop-filter 0.3s ease-in-out",
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+    zIndex: 10,
+  }));
+const StyledContainer = styled(Typography)(() => ({
+  position: "absolute" as "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: "415px",
+  height: "426px",
+  flexShrink: 0,
+  borderRadius: "8px",
+  background: "#27292D",
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
-  flexShrink: 0,
-  borderRadius: "8px",
-  border: `2px solid #5f5f60`,
-  background: "#27292D",
+  zIndex: 12,
+  padding: "40px 24px",
 }));
-
 const StyledTitle = styled(Typography)(() => ({
   color: "#6B6C70",
   fontFamily: "Inter",
@@ -27,7 +40,6 @@ const StyledTitle = styled(Typography)(() => ({
   fontWeight: 500,
   lineHeight: "normal",
   letterSpacing: "0.42px",
-  // marginTop: "40px",
 }));
 
 const StyledMessage = styled(Typography)(() => ({
@@ -37,28 +49,31 @@ const StyledMessage = styled(Typography)(() => ({
   fontStyle: "normal",
   fontWeight: 600,
   lineHeight: "normal",
-  marginTop: "15px",
+  marginTop: 8,
 }));
 
-interface LoginFormProps{
-  LoginModal?:boolean;
-}
-
-
-const LoginForm: React.FC<LoginFormProps> = (props) => {
-  const{LoginModal=false}=props;
-  const navigate = useNavigate();
+const SignUpModal: React.FC = () => {
   return (
-    <StyledBox>
-      { LoginModal && <Box sx={{ position: "relative", left: "208px", top: "5px" }}>
-        <img src={Ellipse2} alt="crossBackground" />
-        <Box sx={{ position: "absolute", top: "8px", left: "8px" }}>
-          <img src={Cross} alt="cross" />
-        </Box>
-      </Box>}
-      <StyledTitle sx={{marginTop:LoginModal ? "" :"40px"}}>WELCOME BACK</StyledTitle>
-      <StyledMessage>Log into your account</StyledMessage>
-
+   <>
+    <BlurredBackground  />
+    <StyledContainer>
+      <Box
+        sx={{
+          position: "absolute",
+          width: "16px",
+          height: "16px",
+          background: "#202326",
+          borderRadius: "50%",
+          flexShrink: 0,
+          right: "4px",
+          top: "8px",
+          padding: "5px",
+        }}
+      >
+        <img src={Cross} alt="Cross-Icon" />
+      </Box>
+      <StyledTitle>SIGN UP</StyledTitle>
+      <StyledMessage>Create an account to continue</StyledMessage>
       <Box
         sx={{
           display: "flex",
@@ -67,18 +82,27 @@ const LoginForm: React.FC<LoginFormProps> = (props) => {
           flexGrow: 1,
         }}
       >
-        <Box sx={{ marginTop: "30px" }}>
+        <Box sx={{ marginTop: "15px" }}>
           <label className="usernamePlaceholder">
-            <p>Email or Username</p>
+            <p>Email</p>
             <input
               className="inputField"
-              placeholder="Enter your email or username"
+              placeholder="Enter your email"
+              type="email"
+            />
+          </label>
+        </Box>
+        <Box sx={{ marginTop: "16px" }}>
+          <label className="usernamePlaceholder">
+            <p>Username</p>
+            <input
+              className="inputField"
+              placeholder="Choose a preferred username"
               type="text"
             />
           </label>
         </Box>
-
-        <Box sx={{ position: "relative", marginTop: "15px" }}>
+        <Box sx={{ position: "relative", marginTop: "16px" }}>
           <label className="passwordPlaceholder">
             <Box
               sx={{
@@ -100,35 +124,21 @@ const LoginForm: React.FC<LoginFormProps> = (props) => {
               >
                 Password
               </Typography>
-              <Typography
-                sx={{
-                  color: "#C5C7CA",
-                  textAlign: "right",
-                  fontFamily: "Inter",
-                  fontSize: "12px",
-                  fontStyle: "normal",
-                  fontWeight: 500,
-                  lineHeight: "normal",
-                }}
-              >
-                Forgot password?
-              </Typography>
             </Box>
 
             <input
               className="inputField"
-              placeholder="Enter your password"
+              placeholder="Choose a strong password"
               type="password"
               style={{ position: "relative" }}
             />
-            <span className="eyeIconContainer">
+            <span style={{ position: "absolute", top: "41px", right: "11px" }}>
               <img src={eye} alt="eyeImage" />
             </span>
           </label>
         </Box>
       </Box>
       <Button
-        onClick={() => navigate("/home")}
         sx={{
           width: "415px",
           height: "43px",
@@ -141,15 +151,17 @@ const LoginForm: React.FC<LoginFormProps> = (props) => {
           fontStyle: "normal",
           fontWeight: 500,
           lineHeight: "normal",
+          marginTop: "25px",
         }}
       >
-        Login Now
+        Continue
       </Button>
-
       <Box
         sx={{
-          display: "flex",
-          justifyContent: "flex-start",
+            display:"flex",
+          position: "relative",
+          bottom: "-9px",
+          right: "95px",
           fontFamily: "Inter",
           fontSize: 14,
           fontStyle: "normal",
@@ -160,7 +172,7 @@ const LoginForm: React.FC<LoginFormProps> = (props) => {
           gap: "3px",
         }}
       >
-        Not registered yet?
+        Already have an account?
         <Typography
           sx={{
             color: "#C5C7CA",
@@ -172,11 +184,12 @@ const LoginForm: React.FC<LoginFormProps> = (props) => {
           }}
         >
           {" "}
-          Register →
+          Login →
         </Typography>
       </Box>
-    </StyledBox>
+    </StyledContainer>
+   </>
   );
 };
 
-export default LoginForm;
+export default SignUpModal;

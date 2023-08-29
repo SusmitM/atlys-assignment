@@ -5,6 +5,7 @@ import { styled } from "styled-components";
 import CreatePost from "../components/CreatePost";
 import {UserData} from "../data/UserData";
 import PostCard from "../components/PostCard";
+import SignUpModal from "../components/SignUpModal";
 
 const StyledCaption = styled(Typography)(() => ({
   color: "#7F8084",
@@ -16,9 +17,11 @@ const StyledCaption = styled(Typography)(() => ({
   marginTop:"12px"
 }));
 
+
 const Home: React.FC = () => {
   return (
     <Container maxWidth="sm" sx={{ padding: "4rem 1rem" }}>
+      <SignUpModal/>
       <Typography
         sx={{
           color: "#C5C7CA",
