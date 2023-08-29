@@ -1,8 +1,27 @@
 import React from 'react'
+import LoginForm from '../components/LoginForm'
+import { Box } from '@mui/system';
+import { styled } from "@mui/system";
+import Logo from "../assets/Logo.svg"
+
+const StyledLoginContainer= styled(Box)(() => ({
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "center",
+  alignItems: "center",
+  gap: "49px",
+}));
 
 const Login: React.FC = () => {
   return (
-    <div>Login</div>
+   <>
+   <StyledLoginContainer>
+    <Box><img src={Logo} alt="logo"/></Box>
+
+    <LoginForm/>
+   </StyledLoginContainer>
+   
+   </>
   )
 }
 

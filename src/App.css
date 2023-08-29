@@ -1,0 +1,29 @@
+
+.usernamePlaceholder {
+    color: #C5C7CA;
+    font-family: Inter;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.inputField {
+    width: 415px;
+    height: 43px;
+    flex-shrink: 0;
+    border-radius: 4px;
+    border: 1.5px solid #35373B;
+    background-color: #27292D;
+    color: #7F8084;
+    font-family: Inter;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+.eyeIconContainer{
+   position: relative;
+    right: 29px;
+    top: 5%; 
+}
