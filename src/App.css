@@ -1,12 +1,4 @@
 
-.usernamePlaceholder {
-    color: #C5C7CA;
-    font-family: Inter;
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: normal;
-}
 
 .inputField {
     width: 415px;
@@ -22,9 +14,4 @@
     font-weight: 400;
     line-height: normal;
     padding: 4px;
-}
-.eyeIconContainer{
-   position: relative;
-    right: 29px;
-    top: 5%; 
 }

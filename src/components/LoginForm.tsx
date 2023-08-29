@@ -7,8 +7,6 @@ import eye from "../assets/eye.svg";
 import Ellipse2 from "../assets/Ellipse2.svg";
 import Cross from "../assets/Cross.svg";
 
-
-
 const BlurredBackground = styled("div")(() => ({
   position: "fixed",
   top: 0,
@@ -35,7 +33,6 @@ const StyledBox = styled(Box)(() => ({
   borderRadius: "8px",
   border: `2px solid #5f5f60`,
   background: "#27292D",
-  zIndex: 12,
 }));
 
 const StyledTitle = styled(Typography)(() => ({
@@ -46,6 +43,7 @@ const StyledTitle = styled(Typography)(() => ({
   fontWeight: 500,
   lineHeight: "normal",
   letterSpacing: "0.42px",
+  marginTop: 40,
 }));
 
 const StyledMessage = styled(Typography)(() => ({
@@ -55,154 +53,192 @@ const StyledMessage = styled(Typography)(() => ({
   fontStyle: "normal",
   fontWeight: 600,
   lineHeight: "normal",
-  marginTop: "15px",
+  marginTop: "8px",
 }));
 
-interface LoginFormProps{
-  LoginModal?:boolean;
-  closeLoginFormHandler?:()=>void;
-  openSignUpHandler?:()=>void;
+interface LoginFormProps {
+  LoginModal?: boolean;
+  closeLoginFormHandler?: () => void;
+  openSignUpHandler?: () => void;
 }
 
-
 const LoginForm: React.FC<LoginFormProps> = (props) => {
-  const{LoginModal=false,closeLoginFormHandler,openSignUpHandler}=props;
+  const {
+    LoginModal = false,
+    closeLoginFormHandler,
+    openSignUpHandler,
+  } = props;
   const navigate = useNavigate();
   return (
     <>
-    {LoginModal && <BlurredBackground />}
-    <StyledBox>
-      { LoginModal && <Box sx={{ position: "relative", left: "208px", top: "5px" }}>
-        <img src={Ellipse2} alt="crossBackground" />
-        <Box onClick={closeLoginFormHandler} sx={{ position: "absolute", top: "8px", left: "8px" }}>
-          <img src={Cross} alt="cross" />
-        </Box>
-      </Box>}
-      <StyledTitle sx={{marginTop:LoginModal ? "" :"40px"}}>WELCOME BACK</StyledTitle>
-      <StyledMessage>Log into your account</StyledMessage>
+      {LoginModal && <BlurredBackground />}
+      <StyledBox sx={{ zIndex: LoginModal ? 12 : 0 }}>
+        {LoginModal && (
+          <Box
+          onClick={closeLoginFormHandler}
+            sx={{
+              position: "absolute",
+              width: "16px",
+              height: "16px",
+              background: "#202326",
+              borderRadius: "50%",
+              flexShrink: 0,
+              right: "4px",
+              top: "8px",
+              padding: "5px",
+              cursor: "pointer",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <img src={Cross} alt="cross" />
+          </Box>
+        )}
+        <StyledTitle sx={{ marginTop: LoginModal ? "" : "40px" }}>
+          WELCOME BACK
+        </StyledTitle>
+        <StyledMessage>Log into your account</StyledMessage>
 
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "flex-start",
-          flexGrow: 1,
-        }}
-      >
-        <Box sx={{ marginTop: "30px" }}>
-          <label className="usernamePlaceholder">
-            <p>Email or Username</p>
-            <input
-              className="inputField"
-              placeholder="Enter your email or username"
-              type="text"
-            />
-          </label>
-        </Box>
-
-        <Box sx={{ position: "relative", marginTop: "15px" }}>
-          <label className="passwordPlaceholder">
-            <Box
-              sx={{
-                display: "flex",
-                justifyContent: "space-between",
-                width: "415px",
-                marginBottom: "5px",
-              }}
-            >
-              <Typography
-                sx={{
-                  color: "#C5C7CA",
-                  fontFamily: "Inter",
-                  fontSize: 14,
-                  fontStyle: "normal",
-                  fontWeight: 500,
-                  lineHeight: "normal",
-                }}
-              >
-                Password
-              </Typography>
-              <Typography
-                sx={{
-                  color: "#C5C7CA",
-                  textAlign: "right",
-                  fontFamily: "Inter",
-                  fontSize: "12px",
-                  fontStyle: "normal",
-                  fontWeight: 500,
-                  lineHeight: "normal",
-                }}
-              >
-                Forgot password?
-              </Typography>
-            </Box>
-
-            <input
-              className="inputField"
-              placeholder="Enter your password"
-              type="password"
-              style={{ position: "relative" }}
-            />
-            <span className="eyeIconContainer">
-              <img src={eye} alt="eyeImage" />
-            </span>
-          </label>
-        </Box>
-      </Box>
-      <Button
-      onClick={LoginModal ? closeLoginFormHandler : () => navigate("/home")}
-      
-        sx={{
-          width: "415px",
-          height: "43px",
-          flexShrink: 0,
-          borderRadius: "4px",
-          background: "#4A96FF",
-          color: "#FFF",
-          fontFamily: "Inter",
-          fontSize: "16px",
-          fontStyle: "normal",
-          fontWeight: 500,
-          lineHeight: "normal",
-        }}
-      >
-        Login Now
-      </Button>
-
-      <Box
-     onClick={LoginModal ? openSignUpHandler : () => {}}
-        sx={{
-          display: "flex",
-          position: "relative",
-            bottom: "-9px",
-            right: "118px",
-          fontFamily: "Inter",
-          fontSize: 14,
-          fontStyle: "normal",
-          fontWeight: 500,
-          lineHeight: "normal",
-          marginBottom: "40px",
-          color: "#7F8084",
-          gap: "3px",
-          cursor:"pointer"
-        }}
-      >
-        Not registered yet?
-        <Typography
+        <Box
           sx={{
-            color: "#C5C7CA",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "flex-start",
+            flexGrow: 1,
+            marginTop: "30px",
+          }}
+        >
+          <Box>
+            <label>
+            <Typography
+                sx={{
+                  color: "#C5C7CA",
+                  fontFamily: "Inter",
+                  fontSize: "14px",
+                  fontStyle: "normal",
+                  fontWeight: 500,
+                  lineHeight: "normal",
+                  marginBottom:"10px"
+                }}
+              >
+              Email or Username
+              </Typography>
+              
+              <input
+                className="inputField"
+                placeholder="Enter your email or username"
+                type="text"
+              />
+            </label>
+          </Box>
+
+          <Box sx={{ position: "relative", marginTop: "15px" }}>
+            <label className="passwordPlaceholder">
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  width: "415px",
+                  marginBottom: "5px",
+                }}
+              >
+                <Typography
+                  sx={{
+                    color: "#C5C7CA",
+                    fontFamily: "Inter",
+                    fontSize: 14,
+                    fontStyle: "normal",
+                    fontWeight: 500,
+                    lineHeight: "normal",
+                  }}
+                >
+                  Password
+                </Typography>
+                <Typography
+                  sx={{
+                    color: "#C5C7CA",
+                    textAlign: "right",
+                    fontFamily: "Inter",
+                    fontSize: "12px",
+                    fontStyle: "normal",
+                    fontWeight: 500,
+                    lineHeight: "normal",
+                  }}
+                >
+                  Forgot password?
+                </Typography>
+              </Box>
+
+              <input
+                className="inputField"
+                placeholder="Enter your password"
+                type="password"
+                style={{ position: "relative" }}
+              />
+              <span
+                style={{ position: "relative", right: "29px", top: "5%" }}
+                className="eyeIconContainer"
+              >
+                <img src={eye} alt="eyeImage" />
+              </span>
+            </label>
+
+          </Box>
+          <Button
+          onClick={LoginModal ? closeLoginFormHandler : () => navigate("/home")}
+          sx={{
+            width: "425px",
+            height: "43px",
+            flexShrink: 0,
+            borderRadius: "4px",
+            marginTop:"20px",
+            background: "#4A96FF",
+            color: "#FFF",
             fontFamily: "Inter",
-            fontSize: 14,
+            fontSize: "16px",
             fontStyle: "normal",
             fontWeight: 500,
             lineHeight: "normal",
           }}
         >
-          {" "}
-          Register →
-        </Typography>
-      </Box>
-    </StyledBox>
+          Login Now
+        </Button>
+
+        <Box
+          onClick={LoginModal ? openSignUpHandler : () => {}}
+          sx={{
+            display: "flex",
+            fontFamily: "Inter",
+            fontSize: 14,
+            fontStyle: "normal",
+            fontWeight: 500,
+            lineHeight: "normal",
+            marginBottom: "40px",
+            color: "#7F8084",
+            gap: "3px",
+            marginTop:"12px",
+            cursor: "pointer",
+          }}
+        >
+          Not registered yet?
+          <Typography
+            sx={{
+              color: "#C5C7CA",
+              fontFamily: "Inter",
+              fontSize: 14,
+              fontStyle: "normal",
+              fontWeight: 500,
+              lineHeight: "normal",
+            }}
+          >
+            {" "}
+            Register →
+          </Typography>
+        </Box>
+        </Box>
+        
+      </StyledBox>
     </>
   );
 };

@@ -97,8 +97,8 @@ const CreatePost: React.FC<CreatePostProps> = (props) => {
           }}
         />
       </Box>
-      ;
-      <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+      
+      <Box sx={{ display: "flex", justifyContent: "flex-end", marginTop:"16px" }}>
         <StyledPostButton>Post</StyledPostButton>
       </Box>
     </StyledPostContainer>

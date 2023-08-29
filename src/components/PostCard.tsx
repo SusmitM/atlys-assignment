@@ -45,7 +45,7 @@ const PostCard: React.FC<PostContainerProps> = (props) => {
   } = data;
 
   return (
-    <StyledPostCard onClick={()=>openSignUpHandler()}>
+    <StyledPostCard  onClick={()=>openSignUpHandler()}>
       <Box
         sx={{
           display: "flex",

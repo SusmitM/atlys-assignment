@@ -54,10 +54,10 @@ const StyledMessage = styled(Typography)(() => ({
 
 interface SignUpModalProps {
   closeSignUpHandler: () => void;
-  openLoginFormHandler:()=>void;
+  openLoginFormHandler: () => void;
 }
 const SignUpModal: React.FC<SignUpModalProps> = (props) => {
-  const { closeSignUpHandler,openLoginFormHandler } = props;
+  const { closeSignUpHandler, openLoginFormHandler } = props;
   return (
     <>
       <BlurredBackground />
@@ -77,7 +77,6 @@ const SignUpModal: React.FC<SignUpModalProps> = (props) => {
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-           
           }}
           onClick={() => closeSignUpHandler()}
         >
@@ -94,8 +93,21 @@ const SignUpModal: React.FC<SignUpModalProps> = (props) => {
           }}
         >
           <Box sx={{ marginTop: "15px" }}>
-            <label className="usernamePlaceholder">
-              <p>Email</p>
+            <label>
+            <Typography
+                sx={{
+                  color: "#C5C7CA",
+                  fontFamily: "Inter",
+                  fontSize: "14px",
+                  fontStyle: "normal",
+                  fontWeight: 500,
+                  lineHeight: "normal",
+                  marginBottom:"10px"
+                }}
+              >
+               Email
+              </Typography>
+              
               <input
                 className="inputField"
                 placeholder="Enter your email"
@@ -103,9 +115,21 @@ const SignUpModal: React.FC<SignUpModalProps> = (props) => {
               />
             </label>
           </Box>
-          <Box sx={{ marginTop: "16px" }}>
-            <label className="usernamePlaceholder">
-              <p>Username</p>
+          <Box sx={{ marginTop: "15px" }}>
+            <label>
+              <Typography
+                sx={{
+                  color: "#C5C7CA",
+                  fontFamily: "Inter",
+                  fontSize: "14px",
+                  fontStyle: "normal",
+                  fontWeight: 500,
+                  lineHeight: "normal",
+                  marginBottom:"10px"
+                }}
+              >
+                Username
+              </Typography>
               <input
                 className="inputField"
                 placeholder="Choose a preferred username"
@@ -113,28 +137,23 @@ const SignUpModal: React.FC<SignUpModalProps> = (props) => {
               />
             </label>
           </Box>
-          <Box sx={{ position: "relative", marginTop: "16px" }}>
-            <label className="passwordPlaceholder">
+          <Box sx={{ position: "relative", marginTop: "15px" }}>
+            <label>
               <Box
                 sx={{
                   display: "flex",
                   justifyContent: "space-between",
                   width: "415px",
-                  marginBottom: "5px",
+                  color: "#C5C7CA",
+                  fontFamily: "Inter",
+                  fontSize: 14,
+                  fontStyle: "normal",
+                  fontWeight: 500,
+                  lineHeight: "normal",
+                  marginBottom:"10px"
                 }}
               >
-                <Typography
-                  sx={{
-                    color: "#C5C7CA",
-                    fontFamily: "Inter",
-                    fontSize: 14,
-                    fontStyle: "normal",
-                    fontWeight: 500,
-                    lineHeight: "normal",
-                  }}
-                >
-                  Password
-                </Typography>
+                Password
               </Box>
 
               <input
@@ -144,7 +163,7 @@ const SignUpModal: React.FC<SignUpModalProps> = (props) => {
                 style={{ position: "relative" }}
               />
               <span
-                style={{ position: "absolute", top: "41px", right: "11px" }}
+                style={{ position: "absolute", top: "55%", right: "11px" }}
               >
                 <img src={eye} alt="eyeImage" />
               </span>
@@ -152,7 +171,7 @@ const SignUpModal: React.FC<SignUpModalProps> = (props) => {
           </Box>
         </Box>
         <Button
-        onClick={() => closeSignUpHandler()}
+          onClick={() => closeSignUpHandler()}
           sx={{
             width: "415px",
             height: "43px",
@@ -184,9 +203,9 @@ const SignUpModal: React.FC<SignUpModalProps> = (props) => {
             marginBottom: "40px",
             color: "#7F8084",
             gap: "3px",
-            cursor:"pointer"
+            cursor: "pointer",
           }}
-          onClick={()=>openLoginFormHandler()}
+          onClick={() => openLoginFormHandler()}
         >
           Already have an account?
           <Typography

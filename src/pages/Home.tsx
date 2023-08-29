@@ -75,7 +75,7 @@ const Home: React.FC = () => {
       {
         UserData.map(data=>{
           return(
-            <PostCard openSignUpHandler={openSignUpHandler}  data={data}/>
+            <PostCard key={data.id} openSignUpHandler={openSignUpHandler}  data={data}/>
           )
         })
       }

@@ -16,7 +16,7 @@ const Login: React.FC = () => {
   return (
    <>
    <StyledLoginContainer>
-    <Box><img src={Logo} alt="logo"/></Box>
+    <Box sx={{marginTop:"45px"}}><img src={Logo} alt="logo"/></Box>
 
     <LoginForm/>
    </StyledLoginContainer>
