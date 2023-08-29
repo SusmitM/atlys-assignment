@@ -13,7 +13,8 @@ const StyledPostCard = styled(Box)(() => ({
   border: "2px solid #35373B",
   background: "#27292D",
   margin: "16px 0px",
-  padding:"26px 20px"
+  padding:"26px 20px",
+  cursor:"pointer"
 }));
 
 interface PostContainerProps {
@@ -27,9 +28,11 @@ interface PostContainerProps {
     postText: string;
     isEdited: boolean;
   };
+  openSignUpHandler: () => void;
 }
 
-const PostCard: React.FC<PostContainerProps> = ({ data }) => {
+const PostCard: React.FC<PostContainerProps> = (props) => {
+  const {data,openSignUpHandler }=props;
   const {
     id,
     profilePic,
@@ -42,7 +45,7 @@ const PostCard: React.FC<PostContainerProps> = ({ data }) => {
   } = data;
 
   return (
-    <StyledPostCard>
+    <StyledPostCard onClick={()=>openSignUpHandler()}>
       <Box
         sx={{
           display: "flex",

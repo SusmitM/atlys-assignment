@@ -34,9 +34,16 @@ const StyledPostButton = styled(Box)(() => ({
   alignItems: "center",
 }));
 
-const CreatePost: React.FC = () => {
+interface CreatePostProps{
+  openSignUpHandler: () => void;
+}
+
+
+
+const CreatePost: React.FC<CreatePostProps> = (props) => {
+  const {openSignUpHandler}=props
   return (
-    <StyledPostContainer>
+    <StyledPostContainer onClick={()=>openSignUpHandler()}>
       <Typography
         sx={{
           color: "#C5C7CA",

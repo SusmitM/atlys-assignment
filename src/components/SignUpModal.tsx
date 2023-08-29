@@ -4,20 +4,19 @@ import { Button, Typography } from "@mui/material";
 import Cross from "../assets/Cross.svg";
 import eye from "../assets/eye.svg";
 
-
 const BlurredBackground = styled("div")(() => ({
-    position: "fixed",
-    top: 0,
-    left: 0,
-    width: "100%",
-    height: "100%",
-    backdropFilter: "blur(2px)",
-    transition: "backdrop-filter 0.3s ease-in-out",
-    backgroundColor: "rgba(0, 0, 0, 0.5)",
-    zIndex: 10,
-  }));
+  position: "fixed",
+  top: 0,
+  left: 0,
+  width: "100%",
+  height: "100%",
+  backdropFilter: "blur(2px)",
+  transition: "backdrop-filter 0.3s ease-in-out",
+  backgroundColor: "rgba(0, 0, 0, 0.5)",
+  zIndex: 10,
+}));
 const StyledContainer = styled(Typography)(() => ({
-  position: "absolute" as "absolute",
+  position: "fixed",
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
@@ -25,6 +24,7 @@ const StyledContainer = styled(Typography)(() => ({
   height: "426px",
   flexShrink: 0,
   borderRadius: "8px",
+  border: `2px solid #5f5f60`,
   background: "#27292D",
   display: "flex",
   flexDirection: "column",
@@ -52,143 +52,159 @@ const StyledMessage = styled(Typography)(() => ({
   marginTop: 8,
 }));
 
-const SignUpModal: React.FC = () => {
+interface SignUpModalProps {
+  closeSignUpHandler: () => void;
+  openLoginFormHandler:()=>void;
+}
+const SignUpModal: React.FC<SignUpModalProps> = (props) => {
+  const { closeSignUpHandler,openLoginFormHandler } = props;
   return (
-   <>
-    <BlurredBackground  />
-    <StyledContainer>
-      <Box
-        sx={{
-          position: "absolute",
-          width: "16px",
-          height: "16px",
-          background: "#202326",
-          borderRadius: "50%",
-          flexShrink: 0,
-          right: "4px",
-          top: "8px",
-          padding: "5px",
-        }}
-      >
-        <img src={Cross} alt="Cross-Icon" />
-      </Box>
-      <StyledTitle>SIGN UP</StyledTitle>
-      <StyledMessage>Create an account to continue</StyledMessage>
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "flex-start",
-          flexGrow: 1,
-        }}
-      >
-        <Box sx={{ marginTop: "15px" }}>
-          <label className="usernamePlaceholder">
-            <p>Email</p>
-            <input
-              className="inputField"
-              placeholder="Enter your email"
-              type="email"
-            />
-          </label>
+    <>
+      <BlurredBackground />
+      <StyledContainer>
+        <Box
+          sx={{
+            position: "absolute",
+            width: "16px",
+            height: "16px",
+            background: "#202326",
+            borderRadius: "50%",
+            flexShrink: 0,
+            right: "4px",
+            top: "8px",
+            padding: "5px",
+            cursor: "pointer",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+           
+          }}
+          onClick={() => closeSignUpHandler()}
+        >
+          <img src={Cross} alt="Cross-Icon" />
         </Box>
-        <Box sx={{ marginTop: "16px" }}>
-          <label className="usernamePlaceholder">
-            <p>Username</p>
-            <input
-              className="inputField"
-              placeholder="Choose a preferred username"
-              type="text"
-            />
-          </label>
-        </Box>
-        <Box sx={{ position: "relative", marginTop: "16px" }}>
-          <label className="passwordPlaceholder">
-            <Box
-              sx={{
-                display: "flex",
-                justifyContent: "space-between",
-                width: "415px",
-                marginBottom: "5px",
-              }}
-            >
-              <Typography
+        <StyledTitle>SIGN UP</StyledTitle>
+        <StyledMessage>Create an account to continue</StyledMessage>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "flex-start",
+            flexGrow: 1,
+          }}
+        >
+          <Box sx={{ marginTop: "15px" }}>
+            <label className="usernamePlaceholder">
+              <p>Email</p>
+              <input
+                className="inputField"
+                placeholder="Enter your email"
+                type="email"
+              />
+            </label>
+          </Box>
+          <Box sx={{ marginTop: "16px" }}>
+            <label className="usernamePlaceholder">
+              <p>Username</p>
+              <input
+                className="inputField"
+                placeholder="Choose a preferred username"
+                type="text"
+              />
+            </label>
+          </Box>
+          <Box sx={{ position: "relative", marginTop: "16px" }}>
+            <label className="passwordPlaceholder">
+              <Box
                 sx={{
-                  color: "#C5C7CA",
-                  fontFamily: "Inter",
-                  fontSize: 14,
-                  fontStyle: "normal",
-                  fontWeight: 500,
-                  lineHeight: "normal",
+                  display: "flex",
+                  justifyContent: "space-between",
+                  width: "415px",
+                  marginBottom: "5px",
                 }}
               >
-                Password
-              </Typography>
-            </Box>
+                <Typography
+                  sx={{
+                    color: "#C5C7CA",
+                    fontFamily: "Inter",
+                    fontSize: 14,
+                    fontStyle: "normal",
+                    fontWeight: 500,
+                    lineHeight: "normal",
+                  }}
+                >
+                  Password
+                </Typography>
+              </Box>
 
-            <input
-              className="inputField"
-              placeholder="Choose a strong password"
-              type="password"
-              style={{ position: "relative" }}
-            />
-            <span style={{ position: "absolute", top: "41px", right: "11px" }}>
-              <img src={eye} alt="eyeImage" />
-            </span>
-          </label>
+              <input
+                className="inputField"
+                placeholder="Choose a strong password"
+                type="password"
+                style={{ position: "relative" }}
+              />
+              <span
+                style={{ position: "absolute", top: "41px", right: "11px" }}
+              >
+                <img src={eye} alt="eyeImage" />
+              </span>
+            </label>
+          </Box>
         </Box>
-      </Box>
-      <Button
-        sx={{
-          width: "415px",
-          height: "43px",
-          flexShrink: 0,
-          borderRadius: "4px",
-          background: "#4A96FF",
-          color: "#FFF",
-          fontFamily: "Inter",
-          fontSize: "16px",
-          fontStyle: "normal",
-          fontWeight: 500,
-          lineHeight: "normal",
-          marginTop: "25px",
-        }}
-      >
-        Continue
-      </Button>
-      <Box
-        sx={{
-            display:"flex",
-          position: "relative",
-          bottom: "-9px",
-          right: "95px",
-          fontFamily: "Inter",
-          fontSize: 14,
-          fontStyle: "normal",
-          fontWeight: 500,
-          lineHeight: "normal",
-          marginBottom: "40px",
-          color: "#7F8084",
-          gap: "3px",
-        }}
-      >
-        Already have an account?
-        <Typography
+        <Button
+        onClick={() => closeSignUpHandler()}
           sx={{
-            color: "#C5C7CA",
+            width: "415px",
+            height: "43px",
+            flexShrink: 0,
+            borderRadius: "4px",
+            background: "#4A96FF",
+            color: "#FFF",
+            fontFamily: "Inter",
+            fontSize: "16px",
+            fontStyle: "normal",
+            fontWeight: 500,
+            lineHeight: "normal",
+            marginTop: "25px",
+          }}
+        >
+          Continue
+        </Button>
+        <Box
+          sx={{
+            display: "flex",
+            position: "relative",
+            bottom: "-9px",
+            right: "95px",
             fontFamily: "Inter",
             fontSize: 14,
             fontStyle: "normal",
             fontWeight: 500,
             lineHeight: "normal",
+            marginBottom: "40px",
+            color: "#7F8084",
+            gap: "3px",
+            cursor:"pointer"
           }}
+          onClick={()=>openLoginFormHandler()}
         >
-          {" "}
-          Login →
-        </Typography>
-      </Box>
-    </StyledContainer>
-   </>
+          Already have an account?
+          <Typography
+            sx={{
+              color: "#C5C7CA",
+              fontFamily: "Inter",
+              fontSize: 14,
+              fontStyle: "normal",
+              fontWeight: 500,
+              lineHeight: "normal",
+            }}
+          >
+            {" "}
+            Login →
+          </Typography>
+        </Box>
+      </StyledContainer>
+    </>
   );
 };
 

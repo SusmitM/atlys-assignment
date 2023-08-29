@@ -7,7 +7,25 @@ import eye from "../assets/eye.svg";
 import Ellipse2 from "../assets/Ellipse2.svg";
 import Cross from "../assets/Cross.svg";
 
+
+
+const BlurredBackground = styled("div")(() => ({
+  position: "fixed",
+  top: 0,
+  left: 0,
+  width: "100%",
+  height: "100%",
+  backdropFilter: "blur(2px)",
+  transition: "backdrop-filter 0.3s ease-in-out",
+  backgroundColor: "rgba(0, 0, 0, 0.5)",
+  zIndex: 10,
+}));
+
 const StyledBox = styled(Box)(() => ({
+  position: "fixed",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
   width: "463px",
   height: "420px",
   display: "flex",
@@ -17,6 +35,7 @@ const StyledBox = styled(Box)(() => ({
   borderRadius: "8px",
   border: `2px solid #5f5f60`,
   background: "#27292D",
+  zIndex: 12,
 }));
 
 const StyledTitle = styled(Typography)(() => ({
@@ -27,7 +46,6 @@ const StyledTitle = styled(Typography)(() => ({
   fontWeight: 500,
   lineHeight: "normal",
   letterSpacing: "0.42px",
-  // marginTop: "40px",
 }));
 
 const StyledMessage = styled(Typography)(() => ({
@@ -42,17 +60,21 @@ const StyledMessage = styled(Typography)(() => ({
 
 interface LoginFormProps{
   LoginModal?:boolean;
+  closeLoginFormHandler?:()=>void;
+  openSignUpHandler?:()=>void;
 }
 
 
 const LoginForm: React.FC<LoginFormProps> = (props) => {
-  const{LoginModal=false}=props;
+  const{LoginModal=false,closeLoginFormHandler,openSignUpHandler}=props;
   const navigate = useNavigate();
   return (
+    <>
+    {LoginModal && <BlurredBackground />}
     <StyledBox>
       { LoginModal && <Box sx={{ position: "relative", left: "208px", top: "5px" }}>
         <img src={Ellipse2} alt="crossBackground" />
-        <Box sx={{ position: "absolute", top: "8px", left: "8px" }}>
+        <Box onClick={closeLoginFormHandler} sx={{ position: "absolute", top: "8px", left: "8px" }}>
           <img src={Cross} alt="cross" />
         </Box>
       </Box>}
@@ -128,7 +150,8 @@ const LoginForm: React.FC<LoginFormProps> = (props) => {
         </Box>
       </Box>
       <Button
-        onClick={() => navigate("/home")}
+      onClick={LoginModal ? closeLoginFormHandler : () => navigate("/home")}
+      
         sx={{
           width: "415px",
           height: "43px",
@@ -147,9 +170,12 @@ const LoginForm: React.FC<LoginFormProps> = (props) => {
       </Button>
 
       <Box
+     onClick={LoginModal ? openSignUpHandler : () => {}}
         sx={{
           display: "flex",
-          justifyContent: "flex-start",
+          position: "relative",
+            bottom: "-9px",
+            right: "118px",
           fontFamily: "Inter",
           fontSize: 14,
           fontStyle: "normal",
@@ -158,6 +184,7 @@ const LoginForm: React.FC<LoginFormProps> = (props) => {
           marginBottom: "40px",
           color: "#7F8084",
           gap: "3px",
+          cursor:"pointer"
         }}
       >
         Not registered yet?
@@ -176,6 +203,7 @@ const LoginForm: React.FC<LoginFormProps> = (props) => {
         </Typography>
       </Box>
     </StyledBox>
+    </>
   );
 };
 
