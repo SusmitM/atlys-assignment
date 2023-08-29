@@ -13,7 +13,7 @@ const StyledPostContainer = styled(Box)(() => ({
   display: "flex",
   flexDirection: "column",
   padding: "24px 20px",
-  marginBottom: "16px",
+  margin: "40px 0px",
   cursor: "pointer",
 }));
 

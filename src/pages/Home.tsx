@@ -1,9 +1,10 @@
-import { Typography } from '@mui/material'
-import { Container } from '@mui/system'
-import React from 'react'
-import { styled } from 'styled-components';
-import CreatePost from '../components/CreatePost';
-
+import { Typography } from "@mui/material";
+import { Container } from "@mui/system";
+import React from "react";
+import { styled } from "styled-components";
+import CreatePost from "../components/CreatePost";
+import {UserData} from "../data/UserData";
+import PostCard from "../components/PostCard";
 
 const StyledCaption = styled(Typography)(() => ({
   color: "#7F8084",
@@ -12,28 +13,43 @@ const StyledCaption = styled(Typography)(() => ({
   fontStyle: "normal",
   fontWeight: 400,
   lineHeight: "150%",
- 
+  marginTop:"12px"
 }));
-
 
 const Home: React.FC = () => {
   return (
-   <Container maxWidth="sm" sx={{padding:"4rem 1rem"}}>
-    <Typography sx={{
-  color: "#C5C7CA",
-  fontFamily: "Inter",
-  fontSize: "28px",
-  fontStyle: "normal",
-  fontWeight: 500,
-  lineHeight: "normal",
- 
-}}>Hello Jane</Typography>
-    <StyledCaption>How are you doing today? Would you like to share something with the community 🤗</StyledCaption>
-    <CreatePost/>
+    <Container maxWidth="sm" sx={{ padding: "4rem 1rem" }}>
+      <Typography
+        sx={{
+          color: "#C5C7CA",
+          fontFamily: "Inter",
+          fontSize: "28px",
+          fontStyle: "normal",
+          fontWeight: 500,
+          lineHeight: "normal",
+        }}
+      >
+        Hello Jane
+      </Typography>
+      <StyledCaption>
+        How are you doing today? Would you like to share something with the
+        community 🤗
+      </StyledCaption>
+
+      <CreatePost />
+      {
+        UserData.map(data=>{
+          return(
+            <PostCard data={data}/>
+          )
+        })
+      }
 
 
-   </Container>
-  )
-}
 
-export default Home
+
+    </Container>
+  );
+};
+
+export default Home;
